@@ -1239,6 +1239,20 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
 
 .project-link:hover { letter-spacing: 0.05em; }
 
+/* 有真实链接的项目卡：整卡可点 */
+.project-card[data-href] { position: relative; }
+.project-card[data-href]::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+.project-card[data-href] .project-link { position: relative; z-index: 2; }
+.project-card[data-href]:focus-within {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
 /* ========================================
    Skills & Certs
    ======================================== */
@@ -1962,7 +1976,7 @@ body.no-io .reveal { opacity: 1; transform: none; }
                 <p class="section-subtitle">把学到的知识用在有趣的项目里。</p>
             </div>
                         <div class="projects-grid">
-                <article class="project-card featured">
+                <article class="project-card featured" data-href="https://fzff999.github.io/crm/">
                     <div class="project-cover cover-1">
                         <div class="project-cover-inner">
                             <div class="mock-deck">
@@ -1980,13 +1994,14 @@ body.no-io .reveal { opacity: 1; transform: none; }
                         <div class="project-tags">
                             <span class="tag">网站设计</span>
                             <span class="tag">前端开发</span>
+                            <span class="tag">CRM 系统</span>
                             <span class="tag">房产项目</span>
                         </div>
-                        <h3>房地产项目展示网站</h3>
-                        <p>独立设计并开发一套房地产项目展示网站，涵盖楼盘概览、户型鉴赏、周边配套与预约看房等模块，采用响应式布局，手机与电脑端均可流畅浏览。</p>
+                        <h3>成都房地产 CRM · 客户管理</h3>
+                        <p>独立设计并开发一套面向房产博主的迷你 CRM 系统，涵盖数据看板、客户管理、楼盘库与跟进中心等模块，支持客户阶段跟踪与趋势分析，采用响应式布局，手机与电脑端均可流畅使用。</p>
                         <div class="project-meta">
                             <span>2025 · 个人项目</span>
-                            <a href="#" class="project-link">查看详情 →</a>
+                            <a href="https://fzff999.github.io/crm/" class="project-link" target="_blank" rel="noopener noreferrer">在线体验 →</a>
                         </div>
                     </div>
                 </article>
@@ -2323,6 +2338,20 @@ if (portraitCard && window.matchMedia('(min-width: 981px) and (hover: hover) and
         portraitCard.style.transform = `translate(${x}px, ${y}px)`;
     });
 }
+
+// =============================
+// 项目卡整卡点击（新标签页打开）
+// =============================
+document.querySelectorAll('.project-card[data-href]').forEach(card => {
+    const url = card.dataset.href;
+    card.addEventListener('click', (e) => {
+        // 卡片内的链接自己会处理跳转
+        if (e.target.closest('a')) return;
+        // 允许用户选中文字时不触发跳转
+        if (window.getSelection && String(window.getSelection()).length > 0) return;
+        window.open(url, '_blank', 'noopener');
+    });
+});
 
 // =============================
 // 控制台彩蛋
