@@ -1286,6 +1286,43 @@ a, button { -webkit-tap-highlight-color: transparent; touch-action: manipulation
 
 .project-link:hover { letter-spacing: 0.05em; }
 
+/* 项目进度报告 */
+.project-progress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 16px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: rgba(34, 160, 100, 0.07);
+    border: 1px solid rgba(34, 160, 100, 0.2);
+}
+.project-progress__dot {
+    width: 7px;
+    height: 7px;
+    flex: none;
+    border-radius: 50%;
+    background: #1f9d63;
+    box-shadow: 0 0 0 3px rgba(34, 160, 100, 0.16);
+}
+.project-progress__badge {
+    flex: none;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: #1c7a4d;
+    background: rgba(34, 160, 100, 0.14);
+    padding: 3px 9px;
+    border-radius: 999px;
+    white-space: nowrap;
+}
+.project-progress__text {
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+}
+[data-theme="dark"] .project-progress { background: rgba(52, 199, 132, 0.1); }
+[data-theme="dark"] .project-progress__badge { color: #6ee7a8; background: rgba(52, 199, 132, 0.16); }
+
 /* 有真实链接的项目卡：整卡可点 */
 .project-card[data-href] { position: relative; }
 .project-card[data-href]::after {
@@ -2076,7 +2113,12 @@ body.no-io .reveal { opacity: 1; transform: none; }
                         </div>
                         <h3>人格抽卡机 · 3 道题抽一张卡</h3>
                         <p>把课程里的「客户体验旅程」做成一个能上线的线上服务：3 道题生成专属人格卡，可保存图片、生成分享链接、9.9 元解锁深度解读。纯静态、无后端，手机与电脑端都能流畅使用。</p>
-                        <div class="project-meta">
+                                                <div class="project-progress">
+                            <span class="project-progress__dot" aria-hidden="true"></span>
+                            <span class="project-progress__badge">项目进度报告</span>
+                            <span class="project-progress__text">网站已开发完成，已投入使用</span>
+                        </div>
+<div class="project-meta">
                             <span>2026 · 课程项目</span>
                             <a href="https://fzff999.github.io/persona-gacha/" class="project-link" target="_blank" rel="noopener noreferrer">立即抽一张 →</a>
                         </div>
